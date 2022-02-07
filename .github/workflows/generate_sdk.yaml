@@ -12,8 +12,24 @@ jobs:
     name: Generate Go client
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: craicoverflow/openapi-generator-action@v1
         with:
           generator: go
           input: ${OPENAPI_URL}
           output: go
+
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            go:
+              - 'go/**'
+
+      - name: Commit changes
+        if: steps.changes.outputs.go == 'true'
+        uses: EndBug/add-and-commit@v8
+        with:
+          add: 'go'
+          message: 'Update Go client'
+
