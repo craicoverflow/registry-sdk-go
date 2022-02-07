@@ -16,10 +16,10 @@ jobs:
         with:
           generator: go
           input: ${OPENAPI_URL}
-          git-repo-id: registry-sdk
+          git-repo-id: registry-sdk-go
           git-user-id: Apicurio
           package-name: registry
-          output: go
+          output: client
 
       - name: Git Diff
         run: git status
@@ -28,17 +28,13 @@ jobs:
         id: changes
         with:
           filters: |
-            go:
-              - 'go/**'
-            ts:
-              - 'ts/**'
-            py:
-              - 'python/**'
+            src:
+              - 'client/**'
 
       - name: Push Go client changes
-        if: steps.changes.outputs.go == 'true'
+        if: steps.changes.outputs.src == 'true'
         uses: EndBug/add-and-commit@v8
         with:
-          add: 'go'
+          add: 'client'
           message: 'Update Go client'
 
