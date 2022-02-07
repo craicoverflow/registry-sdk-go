@@ -1,4 +1,4 @@
-# Go API client for registry
+# Go API client for registryclient
 
 Apicurio Registry is a datastore for standard event schemas and API designs. Apicurio Registry enables developers to manage and share the structure of their data using a REST interface. For example, client applications can dynamically push or pull the latest updates to or from the registry without needing to redeploy. Apicurio Registry also enables developers to create rules that govern how registry content can evolve over time. For example, this includes rules for content validation and version compatibility.
 
@@ -40,7 +40,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import registry "github.com/Apicurio/registry-sdk-go"
+import registryclient "github.com/Apicurio/apicurio-registry-client-sdk-go"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -58,7 +58,7 @@ Default configuration comes with `Servers` field that contains server objects as
 For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
 
 ```golang
-ctx := context.WithValue(context.Background(), registry.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), registryclient.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
@@ -66,7 +66,7 @@ ctx := context.WithValue(context.Background(), registry.ContextServerIndex, 1)
 Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
 
 ```golang
-ctx := context.WithValue(context.Background(), registry.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), registryclient.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -80,10 +80,10 @@ An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
-ctx := context.WithValue(context.Background(), registry.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), registryclient.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), registry.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), registryclient.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},

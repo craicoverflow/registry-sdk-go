@@ -14,9 +14,9 @@ jobs:
         with:
           generator: go
           input: https://raw.githubusercontent.com/Apicurio/apicurio-registry/master/${{github.event.client_payload.openapi_file_path}}
-          git-repo-id: registry-sdk-go
+          git-repo-id: apicurio-registry-client-sdk-go
           git-user-id: Apicurio
-          package-name: registry
+          package-name: registryclient
 
       - uses: dorny/paths-filter@v2
         id: changes
