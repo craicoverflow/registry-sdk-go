@@ -32,3 +32,6 @@ jobs:
           delete-branch: true
           branch-suffix: short-commit-hash
           branch: generate-sdk
+          title: "Update API client [generated]"
+          body: |
+            Automated update of the Apicurio Registry SDK
