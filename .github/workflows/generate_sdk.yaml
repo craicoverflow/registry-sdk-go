@@ -1,0 +1,19 @@
+name: Generate API clients
+on: 
+  push:
+    branches:
+      - poc
+
+env:
+  OPENAPI_URL: https://raw.githubusercontent.com/Apicurio/apicurio-registry/master/app/src/main/resources-unfiltered/META-INF/resources/api-specifications/registry/v2/openapi.json
+
+jobs:
+  generate_go:
+    name: Generate Go client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: craicoverflow/openapi-generator-action@v1
+        with:
+          generator: go
+          input: ${OPENAPI_URL}
+          output: go
