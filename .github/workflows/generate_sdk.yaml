@@ -1,6 +1,6 @@
 name: Generate API clients
-on: 
-  repository_dispatch:
+on:
+  repository_dispatch: 
     types: [openapi-update]
 
 env:
@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: craicoverflow/openapi-generator-action@v1
         with:
           generator: go
@@ -19,22 +20,8 @@ jobs:
           git-repo-id: registry-sdk-go
           git-user-id: Apicurio
           package-name: registry
-          output: client
 
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            src:
-              - 'client/**'
-      
-      - name: Stage source files
-        if: steps.changes.outputs.src == 'true'
-        run: git add client/**
-
-      
       - name: Create Pull Request
-        if: steps.changes.outputs.src == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           delete-branch: true
