@@ -1,7 +1,7 @@
 name: Generate API clients
 on: 
   repository_dispatch:
-    types: [registry-updated]
+    types: [openapi-update]
 
 env:
   OPENAPI_URL: https://raw.githubusercontent.com/Apicurio/apicurio-registry/master/app/src/main/resources-unfiltered/META-INF/resources/api-specifications/registry/v2/openapi.json
